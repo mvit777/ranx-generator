@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<!-- see list of available page events https://www.mageplaza.com/magento-2-module-development/magento-2-events.html
+	<event name="some_event_here">
+	  <observer name="@@vendor@@_@@module@@_observer" instance="@@vendor@@\@@module@@\Observer\SomeObserverClass" />
+	</event>
+	<event name="some_other_event_here">
+	  <observer name="@@vendor@@_@@module@@_observer" instance="@@vendor@@\@@module@@\Observer\SomeOtherObserverClass" />
+	</event>
+-->
+</config>

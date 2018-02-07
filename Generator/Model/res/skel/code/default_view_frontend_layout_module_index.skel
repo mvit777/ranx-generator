@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+	<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		layout="1column"
+		xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+		<head>
+			<title>Some Title</title>
+		</head>
+		<body>
+			<referenceContainer name="content">
+				<block class="@@vendor@@\@@module@@\Block\Index" template="@@vendor@@_@@module@@::index.phtml">
+					<arguments>
+						<!-- <argument name="urlSomeUrl" xsi:type="url" path="@@lowercasemodule@@/someRoute" /> -->
+					</arguments>
+				</block>
+			</referenceContainer>
+		</body>
+	</page>
