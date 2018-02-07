@@ -12,7 +12,7 @@ class Publisher implements IGenerator{
 	
 	public function __construct(){
 		$this->binPath = dirname(__DIR__).'/bin';
-		$this->configPath = __DIR__.'/res/publisher_configs/config.php';
+		$this->configPath = __DIR__.'/res/configs/publisher/config.php';
 		$this->message = '';
 	}
 	

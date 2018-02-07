@@ -2,7 +2,7 @@
 
 namespace Ranx\Generator\Model;
 
-use Magento\CommandExample\Model\BaseGenerator;
+use Ranx\Generator\Model\BaseGenerator;
 
 class FileGenerator extends BaseGenerator implements IGenerator{
 	

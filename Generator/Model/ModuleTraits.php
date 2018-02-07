@@ -14,6 +14,20 @@ trait ModuleTraits{
 		return array_merge($replacers, $this->local_replacers);
 	}
 	
+	/*
+	 * Load module/modulepart config file and instantiate local members
+	 * string $config_file
+	 */
+	protected function loadConfig($config_file){
+		require_once $this->configPath.'configs/'.$config_file;
+		$this->folders = $folders;
+		$this->files = $files;
+		$this->local_replacers = $local_replacers;
+		$this->events = $events;
+		$this->di = $di;
+		$this->routes = $routes;//not used
+	}
+	
 	protected function configure($path){
 		$tokens = explode('/',trim($path));
 		$errMsg = "Error $path does not conform to the required VendorName/ModuleName format";

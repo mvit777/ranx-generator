@@ -15,8 +15,9 @@ class ModuleGeneratorCommand extends Command
 {
 	private $generator;
 	
-	public function __construct(ModuleGenerator $generator){
+	public function __construct(ModuleGenerator $generator, Finder $finder){
 		$this->generator = $generator;
+		$this->finder = $finder;
 		parent::__construct();
 	}
 	
@@ -31,12 +32,12 @@ class ModuleGeneratorCommand extends Command
 	
 	protected function execute(InputInterface $input, OutputInterface $output){
 		$name = $input->getArgument('name');
-		$finder = new Finder();
+		$this->finder->depth('== 0');
 		$config_dir = dirname(dirname(__DIR__)).'/Model/res/configs';
-		$finder->files()->in($config_dir);
+		$this->finder->files()->in($config_dir);
 		
 		$choices = array();
-		foreach ($finder as $file):
+		foreach ($this->finder as $file):
 		    $choices[] = $file->getRelativePathname();
 		endforeach;
 		$helper = $this->getHelper('question');

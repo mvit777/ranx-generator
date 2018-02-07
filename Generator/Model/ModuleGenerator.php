@@ -20,21 +20,12 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		$this->configPath = 'res/';
 	}
 	
-	protected function loadConfig($config_file){
-		require_once $this->configPath.'configs/'.$config_file;
-		$this->folders = $folders;
-		$this->files = $files;
-		$this->local_replacers = $local_replacers;
-		$this->events = $events;
-		$this->di = $di;
-		$this->routes = $routes;
-	}
 	/*
 	 * @param string $path -- the module path <Vendor>/<ModuleName>
 	 */
 	public function run($path, array $configs=array()){
 		if(!isset($configs['config_file'])):
-			$configs['config_file'] = 'default_module.config.php';
+			$configs['config_file'] = 'module.simple.php';
 		endif;
 		$this->configure($path);
 		$this->loadConfig($configs['config_file']);

@@ -1,6 +1,6 @@
 <?php
 //generate a basic module part with a controller
-require_once 'default_module.config.php';
+require_once 'module.default.all.php';
 
 //make sure you dont ovewrite folders and files that should/could be already existing
 foreach($folders as $key=>$value){

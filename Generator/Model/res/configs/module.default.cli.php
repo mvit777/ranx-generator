@@ -1,5 +1,5 @@
 <?php
-require_once 'simple_module.config.php';
+require_once 'module.simple.php';
 
 
 $folders['/Console'] = true;

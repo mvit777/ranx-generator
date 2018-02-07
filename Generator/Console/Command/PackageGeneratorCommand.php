@@ -7,8 +7,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Magento\CommandExample\Model\PackageGenerator;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use Ranx\Generator\Model\PackageGenerator;
 use Ranx\Generator\Model\Publisher;
 
 class PackageGeneratorCommand extends Command{

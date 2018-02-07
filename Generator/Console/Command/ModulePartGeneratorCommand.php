@@ -15,8 +15,9 @@ class ModulePartGeneratorCommand extends Command
 {
 	private $generator;
 	
-	public function __construct(ModulePartGenerator $generator){
+	public function __construct(ModulePartGenerator $generator, Finder $finder){
 		$this->generator = $generator;
+		$this->finder = $finder;
 		parent::__construct();
 	}
 	
@@ -32,13 +33,15 @@ class ModulePartGeneratorCommand extends Command
 	protected function execute(InputInterface $input, OutputInterface $output){
 		$name = $input->getArgument('name');
 		$output->writeln("Start building part for module $name");
-		$finder = new Finder();
+		
+		$this->finder->depth('== 0');
+		
 		$config_dir = dirname(dirname(__DIR__)).'/Model/res/configs';
-		$finder->files()->in($config_dir);
+		$this->finder->files()->in($config_dir);
 		
 		$choices = array();
-		foreach ($finder as $file):
-			if(strstr($file->getRelativePathName(), 'modulepart_')):
+		foreach ($this->finder as $file):
+			if(strstr($file->getRelativePathName(), 'modulepart.')):
 		    	$choices[] = $file->getRelativePathname();
 			endif;
 		endforeach;
