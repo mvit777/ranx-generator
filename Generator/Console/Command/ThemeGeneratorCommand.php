@@ -54,12 +54,20 @@ class ThemeGeneratorCommand extends Command
 		$question->setErrorMessage('Choice %s is invalid.');
 		$output->writeln("Config files are placed in $config_dir");
 		$config_file = $helper->ask($input, $output, $question);
-		$output->writeln("Start building module $name");
+		$output->writeln("Start building theme $name");
 		$output->writeln("using config file $config_file");
+		$configs = array('config_file'=>$config_file);
 		
 		//TODO: ask frontend | adminhtml
-		$configs = array('config_file'=>$config_file);
-		$configs['subpath'] = 'frontend';
+		$choices = array('frontend', 'adminhtml');
+		$question = new ChoiceQuestion(
+	        'Is this frontend or admin theme? (defaults to 0, CTRL+C to abort)',
+	        $choices,
+	        '0'
+	    );
+		$question->setErrorMessage('Choice %s is invalid.');
+		$subpath = $helper->ask($input, $output, $question);
+		$configs['subpath'] = $subpath;
 		$output->writeln($this->generator->run($name, $configs));
 		
 	}
