@@ -4,6 +4,7 @@ namespace Ranx\Generator\Model;
 use Ranx\Generator\Model\BaseGenerator;
 use Ranx\Generator\Model\FolderGenerator;
 use Ranx\Generator\Model\FileGenerator;
+use Symfony\Component\Filesystem\Filesystem;
 
 require_once 'ModuleTraits.php';
 
@@ -12,11 +13,13 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 	
 	protected $folderGenerator;
 	protected $fileGenerator;
+	protected $filesystem;
 	
 	
-	public function __construct(FolderGenerator $folderGenerator, FileGenerator $fileGenerator){
+	public function __construct(FolderGenerator $folderGenerator, FileGenerator $fileGenerator, Filesystem $filesystem){
 		$this->folderGenerator = $folderGenerator;
 		$this->fileGenerator = $fileGenerator;
+		$this->filesystem = $filesystem;
 		$this->configPath = 'res/';
 	}
 	

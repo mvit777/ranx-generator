@@ -26,6 +26,7 @@ trait ModuleTraits{
 		$this->events = isset($events) ? $events : array() ;
 		$this->di = isset($di) ? $di : array();
 		$this->routes = isset($routes) ? $routes : array();//not used
+		$this->previewImg = isset($previewimg) ? $previewimg : '';
 	}
 	
 	/*
@@ -76,6 +77,11 @@ trait ModuleTraits{
 				$this->message .= $this->fileGenerator->run($path.$key, $fileConfigs).PHP_EOL;
 			endif;
 		endforeach;
+	}
+	
+	protected function copyFile($source, $target){
+		$this->filesystem->copy($source, $target);
+		$this->message .= "I copied file $source to destination $target".PHP_EOL;
 	}
 	
 	protected function normaliseString($str){
