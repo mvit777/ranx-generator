@@ -42,7 +42,8 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		//$path = $this->path;
 		//$folderConfigs = array('res_type'=>'code');
 		try{
-			$this->message .= $this->folderGenerator->run($this->vendor, $folderConfigs).PHP_EOL;
+			$subpath = isset($folderConfigs['subpath']) ? $folderConfigs['subpath'] : '';
+			$this->message .= $this->folderGenerator->run($subpath.'/'.$this->vendor, $folderConfigs).PHP_EOL;
 		}catch(\exception $e){
 			$this->message .= $e->getMessage().' skipping....'.PHP_EOL;
 		}

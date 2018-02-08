@@ -23,9 +23,9 @@ trait ModuleTraits{
 		$this->folders = $folders;
 		$this->files = $files;
 		$this->local_replacers = $local_replacers;
-		$this->events = $events;
-		$this->di = $di;
-		$this->routes = $routes;//not used
+		$this->events = isset($events) ? $events : array() ;
+		$this->di = isset($di) ? $di : array();
+		$this->routes = isset($routes) ? $routes : array();//not used
 	}
 	
 	/*
@@ -52,7 +52,7 @@ trait ModuleTraits{
 			$this->path = $this->vendor .'/'.$this->module;
 		else:
 			//used by ThemeGenerator to determine frontend or adminhtml
-			$this->path = $this->vendor.'/'.$configs['subpath'].'/'.$this->module;
+			$this->path = $configs['subpath'].'/'.$this->vendor.'/'.$this->module;
 		endif;
 	}
 	
