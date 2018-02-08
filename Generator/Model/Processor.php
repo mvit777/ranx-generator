@@ -9,7 +9,7 @@ class Processor implements IGenerator{
 	 * 
 	 * @return string $this->message -- a processed subtemplate
 	 */
-	public function run($path, $configs){
+	public function run($path, array $configs=array()){
 		require_once __DIR__.'/processors/'.$path;
 		
 		$replacers = $configs['replacers'];

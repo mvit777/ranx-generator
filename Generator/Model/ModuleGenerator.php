@@ -27,18 +27,20 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		if(!isset($configs['config_file'])):
 			$configs['config_file'] = 'module.simple.php';
 		endif;
-		$this->configure($path);
+		if(!isset($configs['res_type'])):
+			$configs['res_type'] = 'code';
+		endif;
+		$this->configure($path, $configs);
 		$this->loadConfig($configs['config_file']);
-		
-		$this->buildFolders();
-		$this->buildFiles();
+		$this->buildFolders($configs);
+		$this->buildFiles($configs);
 		
 		return $this->getMessage();
 	}
 	
-	protected function buildFolders(){
+	protected function buildFolders($folderConfigs){
 		//$path = $this->path;
-		$folderConfigs = array('res_type'=>'code');
+		//$folderConfigs = array('res_type'=>'code');
 		try{
 			$this->message .= $this->folderGenerator->run($this->vendor, $folderConfigs).PHP_EOL;
 		}catch(\exception $e){
@@ -49,7 +51,7 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		$this->compileFolders($this->path, $folderConfigs);
 	}
 	
-	protected function buildFiles(){
+	protected function buildFiles($fileConfigs){
 		
 		$replacers = $this->getReplacers();
 		
@@ -57,7 +59,8 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 			$replacers["@@yourevents@@"] = $this->buildEvents();
 		endif;
 		//same for di and routes
-		$fileConfigs = array('res_type'=>'code', 'replacers'=>$replacers);
+		//$fileConfigs = array('res_type'=>'code', 'replacers'=>$replacers);
+		$fileConfigs['replacers'] = $replacers;
 		
 		$this->compileFiles($this->path, $fileConfigs);
 	}

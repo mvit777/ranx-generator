@@ -28,7 +28,13 @@ trait ModuleTraits{
 		$this->routes = $routes;//not used
 	}
 	
-	protected function configure($path){
+	/*
+	 *@param string $path -- Vendor/Module, Vendor/Theme
+	 *@param string $res_type -- code | design
+	 * 
+	 * @return mixed void | exception
+	 */
+	protected function configure($path, $configs){
 		$tokens = explode('/',trim($path));
 		$errMsg = "Error $path does not conform to the required VendorName/ModuleName format";
 		if(count($tokens) !==2):
@@ -42,7 +48,12 @@ trait ModuleTraits{
 		endif;
 		$this->vendor = ucfirst($tokens[0]);
 		$this->module = ucfirst($tokens[1]);
-		$this->path = $this->vendor .'/'.$this->module;
+		if($configs['res_type']=='code'):
+			$this->path = $this->vendor .'/'.$this->module;
+		else:
+			//used by ThemeGenerator to determine frontend or adminhtml
+			$this->path = $this->vendor.'/'.$configs['subpath'].'/'.$this->module;
+		endif;
 	}
 	
 	protected function compileFolders($path, $folderConfigs){

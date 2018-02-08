@@ -18,13 +18,13 @@ class ModulePartGenerator extends ModuleGenerator implements IGenerator{
 	 * Some pre-compilation checks
 	 * Read comments
 	 */
-	protected function buildFolders(){
+	protected function buildFolders($folderConfigs){
 	    //=============debug============
 		/*echo $this->path;//Vendor/Module
 		die();*/
 		//==============fine==========
 		//dir app/code/Vendor/Module must exist
-		$folderConfigs = array('res_type'=>'code');
+		//$folderConfigs = array('res_type'=>'code');
 		$modulePath = $this->folderGenerator->getFullyQualifiedPath($folderConfigs['res_type']).$this->path;
 		if(!$this->folderGenerator->filesystem->exists($modulePath)):
 			throw new \Exception("Error module $modulePath does not exists");

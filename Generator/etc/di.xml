@@ -11,6 +11,7 @@
             <argument name="commands" xsi:type="array">
                 <item name="generate_module_command" xsi:type="object">Ranx\Generator\Console\Command\ModuleGeneratorCommand</item>
             	<item name="generate_modulepart_command" xsi:type="object">Ranx\Generator\Console\Command\ModulePartGeneratorCommand</item>
+            	<item name="generate_theme_command" xsi:type="object">Ranx\Generator\Console\Command\ThemeGeneratorCommand</item>
             	<item name="generate_module_package" xsi:type="object">Ranx\Generator\Console\Command\PackageGeneratorCommand</item>
             </argument>
         </arguments>
