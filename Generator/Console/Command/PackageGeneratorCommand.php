@@ -32,18 +32,32 @@ class PackageGeneratorCommand extends Command{
 	protected function execute(InputInterface $input, OutputInterface $output){
 		$name = $input->getArgument('name');
 		$helper = $this->getHelper('question');
+		$choices = array('no','yes');
+		
 		$question = new ChoiceQuestion(
-	        'Publish package? (defaults to 0, CTRL+C to abort)',
-	        array('no', 'yes'),
+	        'Skip package validation? (defaults to 0, CTRL+C to abort)',
+	        $choices,
 	        '0'
 	    );
 		$question->setErrorMessage('Choice %s is invalid.');
-		$output->writeln("Publish options config file is placed in Model/publisher_configs/config.php");
+		$skipValidation = $helper->ask($input, $output, $question);
+		
+		$question = new ChoiceQuestion(
+	        'Publish package? (defaults to 0, CTRL+C to abort)',
+	        $choices,
+	        '0'
+	    );
+		$question->setErrorMessage('Choice %s is invalid.');
+		$output->writeln("Publish options config file is placed in Model/res/configs/publisher/config.php");
 		$publish = $helper->ask($input, $output, $question);
 		$publisher = $publish == 'yes' ? $this->publisher : null;
 		
 		$output->writeln("Start building packgage for module $name");
-		$output->writeln($this->generator->run($name, $configs = array('res_type'=>'code', 'publisher'=>$publisher)));
-		$output->writeln("Check log to see if package passed validation");
+		
+		$configs = array('res_type'=>'code', 'publisher'=>$publisher, 'skip_validation'=>$skipValidation);
+		$output->writeln($this->generator->run($name, $configs));
+		if($skipValidation=='no'):
+			$output->writeln("Check log to see if package passed validation");
+		endif;
 	}
 }
