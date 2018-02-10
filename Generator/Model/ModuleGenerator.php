@@ -44,14 +44,18 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 	protected function buildFolders($folderConfigs){
 		//$path = $this->path;
 		//$folderConfigs = array('res_type'=>'code');
+		//vendor folder
 		try{
 			$subpath = isset($folderConfigs['subpath']) ? $folderConfigs['subpath'] : '';
 			$this->message .= $this->folderGenerator->run($subpath.'/'.$this->vendor, $folderConfigs).PHP_EOL;
 		}catch(\exception $e){
 			$this->message .= $e->getMessage().' skipping....'.PHP_EOL;
 		}
+		//module folder
 		$this->message .= $this->folderGenerator->run($this->path, $folderConfigs).PHP_EOL;
 		
+		//all other folders inside module
+		$folderConfigs['replacers'] = $this->getReplacers();
 		$this->compileFolders($this->path, $folderConfigs);
 	}
 	
@@ -59,6 +63,7 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		
 		$replacers = $this->getReplacers();
 		
+		//MOVE FROM HERE
 		if(array_key_exists("@@yourevents@@", $replacers) && !empty($this->events)):
 			$replacers["@@yourevents@@"] = $this->buildEvents();
 		endif;
@@ -68,16 +73,16 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		
 		$this->compileFiles($this->path, $fileConfigs);
 	}
-	
+	//MOVE FROM HERE
 	private function buildEvents(){
 		//load snippet build_events.php
 		//return compiled string
 	}
-	
+	//MOVE FROM HERE
 	private function buildRoutes(){
 		
 	}
-	
+	//MOVE FROM HERE
 	private function buildDi(){
 		
 	}

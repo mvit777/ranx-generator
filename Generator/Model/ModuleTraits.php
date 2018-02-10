@@ -8,7 +8,8 @@ trait ModuleTraits{
 			'@@lowercasevendor@@'=>strtolower($this->vendor),
 			'@@lowercasemodule@@'=>strtolower($this->module),
 			'@@vendor@@'=>$this->vendor,
-			'@@module@@'=>$this->module
+			'@@module@@'=>$this->module,
+			'@@date@@'=> date('l jS \of F Y h:i:s A'),
 		);
 		
 		return array_merge($replacers, $this->local_replacers);
@@ -60,6 +61,11 @@ trait ModuleTraits{
 	protected function compileFolders($path, $folderConfigs){
 		foreach($this->folders as $key=>$value):
 			if($value):
+				foreach($folderConfigs['replacers'] as $k=>$v):
+					if(strstr($key, $k)):
+						$key = str_replace($k, $v, $key);
+					endif;
+				endforeach;
 				$this->message .= $this->folderGenerator->run($path.$key, $folderConfigs).PHP_EOL;
 			endif;
 		endforeach;
