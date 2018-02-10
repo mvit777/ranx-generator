@@ -39,6 +39,13 @@ class Publisher implements IGenerator{
 		$this->git($key, $value, true);
 	}
 	
+	/*
+	 * mymirror stopped working properly, trying to force bitbucket -- see res/configs/publisher/config.php
+	 */
+	protected function bitbucket($key, $value){
+		$this->git('mymirror', $value, true);
+	}
+	
 	protected function mymirror($key, $value){
 		$this->git($key, $value, false);
 	}

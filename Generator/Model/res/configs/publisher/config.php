@@ -1,6 +1,6 @@
 <?php
 
-$publishing_options = array(
+/*$publishing_options = array(
 	'repos' => array(
 	    //github branch
 	    //repositories must exist and be registered as remotes in local git
@@ -9,6 +9,15 @@ $publishing_options = array(
 	),
 	'commands' => array(
 		'github'=>'git push -u origin master',
+		'mymirror'=>'git push -u mymirror master'
+	)
+
+);*/
+$publishing_options = array(
+	'repos' => array(
+		'bitbucket'=>'https://marcello71@bitbucket.org/marcello71/m2_extensions.git'
+	),
+	'commands' => array(
 		'mymirror'=>'git push -u mymirror master'
 	)
 
