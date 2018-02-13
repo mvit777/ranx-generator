@@ -24,9 +24,10 @@ trait ModuleTraits{
 		$this->folders = $folders;
 		$this->files = $files;
 		$this->local_replacers = $local_replacers;
-		$this->events = isset($events) ? $events : array() ;
+		$this->processors = isset($processors) && !empty($processors) ? $processors : array();
+		/*$this->events = isset($events) ? $events : array() ;
 		$this->di = isset($di) ? $di : array();
-		$this->routes = isset($routes) ? $routes : array();//not used
+		$this->routes = isset($routes) ? $routes : array();//not used*/
 		$this->previewImg = isset($previewimg) ? $previewimg : '';
 	}
 	

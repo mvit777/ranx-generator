@@ -4,6 +4,7 @@ namespace Ranx\Generator\Model;
 use Ranx\Generator\Model\BaseGenerator;
 use Ranx\Generator\Model\FolderGenerator;
 use Ranx\Generator\Model\FileGenerator;
+use Ranx\Generator\Model\Processor;
 use Symfony\Component\Filesystem\Filesystem;
 
 require_once 'ModuleTraits.php';
@@ -64,26 +65,26 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		$replacers = $this->getReplacers();
 		
 		//MOVE FROM HERE
-		if(array_key_exists("@@yourevents@@", $replacers) && !empty($this->events)):
+		/*if(array_key_exists("@@yourevents@@", $replacers) && !empty($this->events)):
 			$replacers["@@yourevents@@"] = $this->buildEvents();
-		endif;
+		endif;*/
 		//same for di and routes
 		//$fileConfigs = array('res_type'=>'code', 'replacers'=>$replacers);
 		$fileConfigs['replacers'] = $replacers;
-		
+		if(!empty($this->processors)):
+			$fileConfigs['replacers'] = $this->processors($replacers, $fileConfigs);
+		endif;
 		$this->compileFiles($this->path, $fileConfigs);
 	}
-	//MOVE FROM HERE
-	private function buildEvents(){
-		//load snippet build_events.php
-		//return compiled string
-	}
-	//MOVE FROM HERE
-	private function buildRoutes(){
+	
+	protected function processors($replacers, $fileConfigs){
+		$processor = new Processor();
+		foreach($replacers as $key=>$value):
+			if(array_key_exists($value, $this->processors)):
+				$replacers[$key] = $processor->run($value, array('replacers'=>$replacers, 'processors'=>$this->processors));
+			endif;
+		endforeach;
 		
-	}
-	//MOVE FROM HERE
-	private function buildDi(){
-		
+		return $replacers;
 	}
 }

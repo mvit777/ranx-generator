@@ -10,10 +10,10 @@ class Processor implements IGenerator{
 	 * @return string $this->message -- a processed subtemplate
 	 */
 	public function run($path, array $configs=array()){
-		require_once __DIR__.'/processors/'.$path;
-		
-		$replacers = $configs['replacers'];
 		ob_start();
+		$key = $path;
+		$replacers = $configs['replacers'];
+		require_once __DIR__.'/res/processors/'.$path;
 		$this->message = ob_get_contents();
 		ob_end_clean();
 		
