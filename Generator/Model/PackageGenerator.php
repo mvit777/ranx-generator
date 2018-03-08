@@ -28,7 +28,7 @@ class PackageGenerator extends FileGenerator implements IGenerator{
 		chdir($this->basePath.$replacers['res_type'].'/'.$this->vendor);
 		
 		$source_dir = $this->module;
-		$normalisedName = $this->normaliseString($this->vendor).'_'.$this->normaliseString($this->module);
+		$normalisedName = $this->normaliseString($this->vendor).'-'.$this->normaliseString($this->module);
 		$target_dir = $normalisedName;
 		$this->filesystem->mkdir($target_dir, 0775);
 		$this->filesystem->mirror($source_dir, $target_dir);

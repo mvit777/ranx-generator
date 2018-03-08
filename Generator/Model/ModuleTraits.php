@@ -8,12 +8,14 @@ trait ModuleTraits{
 			'@@lowercasevendor@@'=>strtolower($this->vendor),
 			'@@lowercasemodule@@'=>strtolower($this->module),
 			'@@vendor@@'=>$this->vendor,
+			'@@packagename@@' =>$this->getPackageName(),
 			'@@module@@'=>$this->module,
 			'@@date@@'=> date('l jS \of F Y h:i:s A'),
 		);
 		
 		return array_merge($replacers, $this->local_replacers);
 	}
+	
 	
 	/*
 	 * Load module/modulepart config file and instantiate local members
@@ -96,5 +98,9 @@ trait ModuleTraits{
 		$str = str_replace("_", "-", $str);
 		
 		return $str;
+	}
+	
+	public function getPackageName(){
+		return $this->normaliseString($this->vendor).'/'.$this->normaliseString($this->module);
 	}
 }
