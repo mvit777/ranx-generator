@@ -26,6 +26,23 @@ enable the module
 ```
 bin/magento module:enable Ranx_Generator
 ```
+## Usage ##
+to generate a new module from the root of magento installation
+```
+someuser@somepc: magento/bin ranx:generate:module <vendorname>/<modulename>
+```
+it will ask you what config file you want to use
+
+```
+Config files are placed in /var/www/magento2/magento/app/code/Ranx/Generator/Model/res/configs
+Please select a config file (defaults to 0, CTRL+C to abort)
+  [0] theme.simple.php
+  [1] module.simple.php
+  [2] module.default.cli.php
+  [3] modulepart.controller.php
+  [4] module.default.all.php
+ > 
+```
 
 ## Todo ##
 - add more templates files
