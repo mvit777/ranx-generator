@@ -79,7 +79,12 @@ Please select a config file (defaults to 0, CTRL+C to abort)
   [0] modulepart.controller.php
  > 
 ```
-The last available command allows the creation of the skeleton of a custom theme.
+You can invoke the creation of the skeleton of a custom theme with this command.
+
+```
+someuser@somepc bin/magento ranx:generate:theme <vendor>/<theme>
+```
+You can pick a config file (currently only one but you can add yours, again more in next sections)
 ```
 Start building theme Test/Ranx_catalog
 Config files are placed in /var/www/magento2/magento/app/code/Ranx/Generator/Model/res/configs
