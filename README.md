@@ -12,6 +12,21 @@ A command line extension for magento-2.2.2 ce to build theme/module boilerplate
 - Validate it against Magento official validator (bundled)
 - Push it to one or more remote repos
 
+## Installation ##
+
+Use git to pull this repository or download it as a zip. 
+Whatever method you choose your app/code folder must look like this
+```
+app/
+	code/
+		Ranx/
+			Generator/
+```
+enable the module
+```
+bin/magento module:enable Ranx_Generator
+```
+
 ## Todo ##
 - add more templates files
 - add more configuration options
