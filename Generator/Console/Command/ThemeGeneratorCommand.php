@@ -68,6 +68,17 @@ class ThemeGeneratorCommand extends Command
 		$question->setErrorMessage('Choice %s is invalid.');
 		$subpath = $helper->ask($input, $output, $question);
 		$configs['subpath'] = $subpath;
+		
+		$choices = array('blank', 'luma');
+		$question = new ChoiceQuestion(
+	        'extend from blank or luma theme? (defaults to 0, CTRL+C to abort)',
+	        $choices,
+	        '0'
+	    );
+		$question->setErrorMessage('Choice %s is invalid.');
+		$theme_parent = $helper->ask($input, $output, $question);
+		$configs['theme_parent'] = $theme_parent;
+		
 		$output->writeln($this->generator->run($name, $configs));
 		
 	}
