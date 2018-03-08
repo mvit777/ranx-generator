@@ -116,6 +116,11 @@ extend from blank or luma theme? (defaults to 0, CTRL+C to abort)
 ## Adding your own skel files ##
 (missing docs)
 
+## Replacers and Processors ##
+(missing docs)
+
+## Publishing your theme/module to a remote repository ##
+(missing docs)
 
 ## Todo ##
 - add more templates files

@@ -77,7 +77,7 @@ class ThemeGeneratorCommand extends Command
 	    );
 		$question->setErrorMessage('Choice %s is invalid.');
 		$theme_parent = $helper->ask($input, $output, $question);
-		$configs['theme_parent'] = $theme_parent;
+		$configs['parent_theme'] = $theme_parent;
 		
 		$output->writeln($this->generator->run($name, $configs));
 		

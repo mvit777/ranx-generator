@@ -1,6 +1,6 @@
 <?php
 
-$parent_theme = 'Magento/blank'; //Magento/blank | Magento/luma
+//$parent_theme = 'Magento/blank'; //Magento/blank | Magento/luma
 $title = 'Your module title'; //can be changed at runtime
 $subpath = 'frontend'; //can be changed at runtime
 $previewimg = 'preview.jpg';//change it in Model/res/pix to your own
@@ -20,7 +20,7 @@ $files = [
 ];
 
 $local_replacers = [
-    "@@parent_theme@@" => $parent_theme,
+    #"@@parent_theme@@" => $parent_theme,
     "@@subpath@@" => $subpath,
     "@@title@@" => $title,
 	"@@yourdi@@"		=> "",
