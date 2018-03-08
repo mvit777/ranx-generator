@@ -38,7 +38,9 @@ class ModuleGeneratorCommand extends Command
 		
 		$choices = array();
 		foreach ($this->finder as $file):
-		    $choices[] = $file->getRelativePathname();
+		    if(strstr($file->getRelativePathName(), 'module')):
+		    	$choices[] = $file->getRelativePathname();
+			endif;
 		endforeach;
 		$helper = $this->getHelper('question');
 	    $question = new ChoiceQuestion(

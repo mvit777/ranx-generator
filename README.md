@@ -26,6 +26,24 @@ enable the module
 ```
 bin/magento module:enable Ranx_Generator
 ```
+## Available Commands ##
+From the root of magento list all availabe commands and look for ranx entry
+```
+someuser@somepc bin/magento list
+```
+```
+ranx
+  ranx:generate:module                     A command line extension for module skeleton generation. 
+                                           Expects a Vendor/ModuleName string as required argument.
+                                           Accepts a path to a config file as optional argument
+  ranx:generate:modulepart                 A command line extension for modulepart skeleton generation. 
+                                           Expects a Vendor/ModuleName string as required argument.
+                                           Expects a path to a config file as required argument
+  ranx:generate:theme                      A command line extension for theme skeleton generation. 
+                                           Expects a Vendor/ModuleName string as required argument.
+                                           Ask for a path to a config file as required argument
+  ranx:module:package  
+```
 ## Usage ##
 to generate a new module from the root of magento installation
 ```
@@ -36,11 +54,10 @@ it will ask you what config file you want to use
 ```
 Config files are placed in /var/www/magento2/magento/app/code/Ranx/Generator/Model/res/configs
 Please select a config file (defaults to 0, CTRL+C to abort)
-  [0] theme.simple.php
-  [1] module.simple.php
-  [2] module.default.cli.php
-  [3] modulepart.controller.php
-  [4] module.default.all.php
+  [0] module.simple.php
+  [1] module.default.cli.php
+  [2] modulepart.controller.php
+  [3] module.default.all.php
  > 
 ```
 
