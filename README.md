@@ -33,17 +33,18 @@ someuser@somepc bin/magento list
 ```
 ```
 ranx
-  ranx:generate:module                     A command line extension for module skeleton generation. 
-                                           Expects a Vendor/ModuleName string as required argument.
-                                           Accepts a path to a config file as optional argument
-  ranx:generate:modulepart                 A command line extension for modulepart skeleton generation. 
-                                           Expects a Vendor/ModuleName string as required argument.
-                                           Expects a path to a config file as required argument
-  ranx:generate:theme                      A command line extension for theme skeleton generation. 
-                                           Expects a Vendor/ModuleName string as required argument.
-                                           Ask for a path to a config file as required argument
-  ranx:module:package                      A command line extension for packaging an existing module. 
-                                           Expects a Vendor/ModuleName string as required argument.  
+  ranx:generate:module                     Module skeleton generation. 
+                                           Expects a Vendor/ModuleName string 
+                                           as required argument.
+  ranx:generate:modulepart                 Module partial skeleton generation. 
+                                           Expects a Vendor/ModuleName string to an existing module 
+                                           as required argument.
+  ranx:generate:package                    Packages an existing module or theme. 
+                                           Expects a Vendor/Module/ThemeName string 
+                                           to an existing module or theme as required argument.
+  ranx:generate:theme                      Skeleton generation for a custom theme. 
+                                           Expects a Vendor/ModuleName string to an existing theme
+                                           as required argument.
 ```
 ## Usage ##
 to generate a new module from the root of magento installation
@@ -117,6 +118,9 @@ extend from blank or luma theme? (defaults to 0, CTRL+C to abort)
 (missing docs)
 
 ## Replacers and Processors ##
+(missing docs)
+
+## Outputting and Packaging your theme/module ##
 (missing docs)
 
 ## Publishing your theme/module to a remote repository ##

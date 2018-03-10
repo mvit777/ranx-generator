@@ -23,9 +23,9 @@ class ModuleGeneratorCommand extends Command
 	
 	protected function configure(){
 		$this->setName('ranx:generate:module')
-            ->setDescription('A command line extension for module skeleton generation. 
-            				   Expects a Vendor/ModuleName string as required argument.
-            				   Accepts a path to a config file as optional argument')
+            ->setDescription('Module skeleton generation. 
+            				   Expects a Vendor/ModuleName string 
+            				   as required argument.')
 			->addArgument('name',InputArgument::REQUIRED,"provide a Vendor/ModuleName");
 		return parent::configure();
 	}

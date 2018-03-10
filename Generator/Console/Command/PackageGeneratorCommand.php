@@ -23,9 +23,10 @@ class PackageGeneratorCommand extends Command{
 	
 	protected function configure(){
 		$this->setName('ranx:generate:package')
-            ->setDescription('A command line extension for packaging an existing module. 
-            				   Expects a Vendor/ModuleName string as required argument.')
-			->addArgument('name',InputArgument::REQUIRED,"provide a Vendor/ModuleName");
+            ->setDescription('Packages an existing module or theme. 
+            				   Expects a Vendor/Module/ThemeName string 
+            				   to an existing module or theme as required argument.')
+			->addArgument('name',InputArgument::REQUIRED,"provide a Vendor/ModuleThemeName");
 		return parent::configure();
 	}
 	

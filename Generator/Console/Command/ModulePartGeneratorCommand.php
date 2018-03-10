@@ -23,9 +23,9 @@ class ModulePartGeneratorCommand extends Command
 	
 	protected function configure(){
 		$this->setName('ranx:generate:modulepart')
-            ->setDescription('A command line extension for modulepart skeleton generation. 
-            				   Expects a Vendor/ModuleName string as required argument.
-            				   Expects a path to a config file as required argument')
+            ->setDescription('Module partial skeleton generation. 
+            				   Expects a Vendor/ModuleName string to an existing module 
+            				   as required argument.')
 			->addArgument('name',InputArgument::REQUIRED,"provide a Vendor/ModuleName");
 		return parent::configure();
 	}
