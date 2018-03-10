@@ -32,15 +32,14 @@ From the root of magento list all availabe commands and look for ranx entry
 someuser@somepc bin/magento list
 ```
 ```
-ranx
-  ranx:generate:module                     Module skeleton generation. 
+ranx:generate:module                     Module skeleton generation. 
                                            Expects a Vendor/ModuleName string 
                                            as required argument.
   ranx:generate:modulepart                 Module partial skeleton generation. 
                                            Expects a Vendor/ModuleName string to an existing module 
                                            as required argument.
   ranx:generate:package                    Packages an existing module or theme. 
-                                           Expects a Vendor/Module/ThemeName string 
+                                           Expects a Vendor/ModuleOrThemeName string 
                                            to an existing module or theme as required argument.
   ranx:generate:theme                      Skeleton generation for a custom theme. 
                                            Expects a Vendor/ModuleName string to an existing theme

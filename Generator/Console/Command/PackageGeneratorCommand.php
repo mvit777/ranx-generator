@@ -24,9 +24,9 @@ class PackageGeneratorCommand extends Command{
 	protected function configure(){
 		$this->setName('ranx:generate:package')
             ->setDescription('Packages an existing module or theme. 
-            				   Expects a Vendor/Module/ThemeName string 
+            				   Expects a Vendor/ModuleOrThemeName string 
             				   to an existing module or theme as required argument.')
-			->addArgument('name',InputArgument::REQUIRED,"provide a Vendor/ModuleThemeName");
+			->addArgument('name',InputArgument::REQUIRED,"provide a Vendor/ModuleOrThemeName");
 		return parent::configure();
 	}
 	
