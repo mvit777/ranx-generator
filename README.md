@@ -32,7 +32,7 @@ From the root of magento list all availabe commands and look for ranx entry
 someuser@somepc bin/magento list
 ```
 ```
-ranx:generate:module                     Module skeleton generation. 
+ranx:generate:module                       Module skeleton generation. 
                                            Expects a Vendor/ModuleName string 
                                            as required argument.
   ranx:generate:modulepart                 Module partial skeleton generation. 
