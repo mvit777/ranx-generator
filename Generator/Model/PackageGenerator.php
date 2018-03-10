@@ -25,7 +25,14 @@ class PackageGenerator extends FileGenerator implements IGenerator{
 	
 	protected function compileFile($path, $replacers, $skel){
 		$currentDir = __DIR__;
-		chdir($this->basePath.$replacers['res_type'].'/'.$this->vendor);
+		$source_dir = "";
+		if($replacers['res_type'] == 'theme'):
+			$source_dir = $this->basePath.'design/' . $replacers['subpath'] . '/' . $this->vendor;
+		else:
+			$source_dir = $this->basePath.'code/'.$this->vendor;
+		endif; 
+		
+		chdir($source_dir);
 		
 		$source_dir = $this->module;
 		$normalisedName = $this->normaliseString($this->vendor).'-'.$this->normaliseString($this->module);
@@ -39,7 +46,8 @@ class PackageGenerator extends FileGenerator implements IGenerator{
 		exec("zip -r $zipFile $target_dir/ ");
 		$this->filesystem->remove($target_dir);
 		$this->message .= "I created zip file $zipFile".PHP_EOL;
-		$destination_file = dirname($currentDir).'/bin/'.$replacers['res_type'].'/'.$zipFile;
+		$target_dir = $replacers['res_type'] == 'theme' ? 'design' : 'code';
+		$destination_file = dirname($currentDir).'/bin/'.$target_dir.'/'.$zipFile;
 		$this->filesystem->copy($zipFile, $destination_file);
 		$this->filesystem->remove($zipFile);
 		if($this->skipValidation=='no'):

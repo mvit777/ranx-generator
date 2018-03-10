@@ -103,7 +103,7 @@ Is this frontend or admin theme? (defaults to 0, CTRL+C to abort)
 
 ```
 
-You can decide to make it extend from Luma or Blank default themes. (not implemented yet)
+You can decide to make it extend from Luma or Blank default themes.
 ```
 extend from blank or luma theme? (defaults to 0, CTRL+C to abort)
   [0] blank

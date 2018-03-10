@@ -20,7 +20,8 @@ class Publisher implements IGenerator{
 		require_once $this->configPath;
 		$this->package = $path;
 		if($publishing_options['repos']):
-			chdir($this->binPath.'/'.$configs['res_type']);
+			$target_dir = $configs['res_type'] == 'theme' ? 'design' : 'code';
+			chdir($this->binPath.'/'.$target_dir);
 			$this->repos = $publishing_options['repos'];
 			$this->commands = $publishing_options['commands'];
 			foreach($this->repos as $key => $value):
