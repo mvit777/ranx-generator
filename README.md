@@ -61,9 +61,9 @@ Please select a config file (defaults to 0, CTRL+C to abort)
   [3] module.default.all.php
  > 
 ```
->**Ouput** a new Vendor/Module folder in the app/code/ folder.
->If the Vendor does not already exists it will be created. If the Module folder 
->already exists generation will not take place
+**Ouput** a new Vendor/Module folder in the app/code/ folder.
+If the Vendor does not already exists it will be created. If the Module folder 
+already exists generation will not take place
 
 Choice 0 (module.simple.php) builds only a very basic module with only required files. 
 Should you decide to add another element (Ex. a controller) without recreating the whole module 
