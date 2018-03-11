@@ -206,7 +206,18 @@ $folders['/Console/Command'] = true;
 
 $files["/etc/di.xml"] = "climod_etc_di.skel";
 ```
+At the moment only four types of modules' boilerplate and one theme boilerplate are available:
+  [0] module.simple.php
+  [1] module.default.cli.php
+  [2] modulepart.controller.php
+  [3] module.default.all.php
+ nr. 0 outputs a very basic module with all the required files and folders
+ nr. 1 does the same but add the Command folder and a di.xml file
+ nr. 2 add a Controller to an already existing module
+ nr. 3 output a module with all possible files and folders
+
 The idea is to replicate all the library of sample modules that is hosted on [magento samples](https://github.com/magento/magento2-samples)
+
 ## Adding your own skel files ##
 (missing docs)
 
