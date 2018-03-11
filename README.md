@@ -206,6 +206,7 @@ $folders['/Console/Command'] = true;
 
 $files["/etc/di.xml"] = "climod_etc_di.skel";
 ```
+The idea is to replicate all the library of sample modules that is hosted on [magento samples](https://github.com/magento/magento2-samples)
 ## Adding your own skel files ##
 (missing docs)
 
