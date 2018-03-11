@@ -46,6 +46,7 @@ ranx:generate:module                       Module skeleton generation.
                                            as required argument.
 ```
 ## Usage ##
+**ranx:generate:module <vendor>/<module>**
 to generate a new module from the root of magento installation
 ```
 someuser@somepc: magento/bin ranx:generate:module <vendorname>/<modulename>
@@ -69,6 +70,8 @@ Choice 0 (module.simple.php) builds only a very basic module with only required 
 Should you decide to add another element (Ex. a controller) without recreating the whole module 
 you can use the modulepart command
 
+**ranx:generate:modulepart <vendor>/<module>**
+
 ```
  bin/magento ranx:generate:modulepart Test/Ranx_catalog
 ```
@@ -88,6 +91,7 @@ Please select a config file (defaults to 0, CTRL+C to abort)
 ```
 You can invoke the creation of the skeleton of a custom theme with this command.
 
+**ranx:generate:theme <vendor>/<theme>**
 ```
 someuser@somepc bin/magento ranx:generate:theme <vendor>/<theme>
 ```
@@ -123,6 +127,7 @@ extend from blank or luma theme? (defaults to 0, CTRL+C to abort)
 ```
 The last available command let you build a magento2 compliant package out of an already existing 
 theme or module
+**ranx:generate:package <vendor>/<theme_or_module>**
 ```
 someuser@somepc: bin/magento ranx:generate:package <vendor>/<module_or_theme_name>
 ```
