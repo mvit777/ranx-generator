@@ -24,7 +24,7 @@ class ThemeGeneratorCommand extends Command
 	protected function configure(){
 		$this->setName('ranx:generate:theme')
             ->setDescription('Skeleton generation for a custom theme. 
-            				   Expects a Vendor/ModuleName string to an existing theme
+            				   Expects a Vendor/ThemeName string to an existing theme
             				   as required argument.')
 			->addArgument('name',InputArgument::REQUIRED,"provide a Vendor/ModuleName");
 		return parent::configure();

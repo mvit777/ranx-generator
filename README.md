@@ -9,7 +9,7 @@ A command line extension for magento-2.2.2 ce to build theme/module boilerplate
   ranging from the very basic module/theme with just the bare minimum to a complete module/theme
 - Partial generation is possible, so that elements can be added after first generation
 - It can also optionally create a magento package out of the source files
-- Validate it against Magento official validator (bundled)
+- Validate it against [Magento official validator](https://github.com/magento/marketplace-tools) (bundled)
 - Push it to one or more remote repos
 
 ## Installation ##
@@ -42,7 +42,7 @@ ranx:generate:module                       Module skeleton generation.
                                            Expects a Vendor/ModuleOrThemeName string 
                                            to an existing module or theme as required argument.
   ranx:generate:theme                      Skeleton generation for a custom theme. 
-                                           Expects a Vendor/ModuleName string to an existing theme
+                                           Expects a Vendor/ThemeName string to an existing theme
                                            as required argument.
 ```
 ## Usage ##
@@ -114,6 +114,19 @@ The last available command let you build a magento2 compliant package out of an 
 theme or module
 ```
 someuser@somepc: bin/magento ranx:generate:package <vendor>/<module_or_theme_name>
+```
+It will prompt you to specify if it a theme or a module
+```
+Is this a module or a theme? (defaults to 0, CTRL+C to abort)
+  [0] module
+  [1] theme
+ > 
+
+```
+If is a module you will be asked if you want to validate it against [Magento2 validator](https://github.com/magento/marketplace-tools)
+
+```
+
 ```
 ## Adding your config files ##
 (missing docs)
