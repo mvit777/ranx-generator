@@ -43,6 +43,7 @@ class PackageGeneratorCommand extends Command{
 		$question->setErrorMessage('Choice %s is invalid.');
 		$res_type = $helper->ask($input, $output, $question);
 		$subpath = "";
+		$skipValidation = "yes";
 		if($res_type=="theme"):
 			$choices = array('frontend', 'adminhtml');
 			$question = new ChoiceQuestion(
@@ -52,17 +53,18 @@ class PackageGeneratorCommand extends Command{
 		    );
 			$question->setErrorMessage('Choice %s is invalid.');
 			$subpath = $helper->ask($input, $output, $question);
-			
+		else:
+			$choices = array('no','yes');
+			$question = new ChoiceQuestion(
+		        'Skip package validation? (defaults to 0, CTRL+C to abort)',
+		        $choices,
+		        '0'
+		    );
+			$question->setErrorMessage('Choice %s is invalid.');
+			$skipValidation = $helper->ask($input, $output, $question);
 		endif;
 		
-		$choices = array('no','yes');
-		$question = new ChoiceQuestion(
-	        'Skip package validation? (defaults to 0, CTRL+C to abort)',
-	        $choices,
-	        '0'
-	    );
-		$question->setErrorMessage('Choice %s is invalid.');
-		$skipValidation = $helper->ask($input, $output, $question);
+		
 		
 		$question = new ChoiceQuestion(
 	        'Publish package? (defaults to 0, CTRL+C to abort)',
