@@ -72,7 +72,8 @@ you can use the modulepart command
 ```
  bin/magento ranx:generate:modulepart Test/Ranx_catalog
 ```
-**Ouput** new module elements are added to an existing Module
+> **Ouput** new module elements are added to an existing Module. If the new elements 
+> already exists they will not be overwritten
 
 which only shows config files for partial module generation. 
 Currently there is only one config file of this kind, but you can add your own by simply 
@@ -98,9 +99,9 @@ Please select a config file (defaults to 0, CTRL+C to abort)
   [0] theme.simple.php
  > 
 ```
-**Ouput** a new Vendor/Theme folder in the app/design/frontend or adminhtml.
-If the Vendor does not already exists it will be created. If the Theme folder 
-already exists generation will not take place
+> **Ouput** a new Vendor/Theme folder in the app/design/frontend or adminhtml.
+> If the Vendor does not already exists it will be created. If the Theme folder 
+> already exists generation will not take place
 
 You will be prompted to decide wheter it is a frontend or admin template
 ```
@@ -125,8 +126,8 @@ theme or module
 ```
 someuser@somepc: bin/magento ranx:generate:package <vendor>/<module_or_theme_name>
 ```
-**Output** a .zip package in the Generator/bin/code or design folder. Along the process 
-the package can be uploaded to some remote repository
+> **Output** a .zip package in the Generator/bin/code or design folder. Along the process 
+> the package can be uploaded to some remote repository
 
 It will prompt you to specify if it a theme or a module
 ```
