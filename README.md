@@ -220,7 +220,9 @@ At the moment only four types of modules' boilerplate and one theme boilerplate 
 The idea is to replicate all the library of sample modules that is hosted on [magento samples](https://github.com/magento/magento2-samples)
 
 ## Adding your own skel files ##
-(missing docs)
+Files generation happens through the processing of templates files  (.skel) that reside in the Generator/Model/res/skel folder.
+Placeholders in those file are replaced by a list of replacers configured in the config file and for some files with the help of processors (see next section).
+As for config files you can add more skel to accomodate your generation needs
 
 ## Replacers and Processors ##
 (missing docs)
