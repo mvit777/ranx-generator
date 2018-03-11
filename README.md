@@ -110,6 +110,11 @@ extend from blank or luma theme? (defaults to 0, CTRL+C to abort)
   [1] luma
  > 
 ```
+The last available command let you build a magento2 compliant package out of an already existing 
+theme or module
+```
+someuser@somepc: bin/magento ranx:generate:package <vendor>/<module_or_theme_name>
+```
 ## Adding your config files ##
 (missing docs)
 
