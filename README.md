@@ -178,8 +178,33 @@ These config files basically contains:
 - an array of processors that help replacers substitution in some particular files (usually when some elements have to be repeated in a loop)
 
 ## Adding your config files ##
-(missing docs)
+The **module.default.all.php** config file contains every possible file and folder (well not quite yet, but something like 90% atm).
+The other config files simply include **module.default.all.php** (or **module.simple.php**) and pop elements from those two arrays when needed.
 
+Ex. **module.simple.php**
+```
+<?php
+require_once 'module.default.all.php';
+
+foreach($folders as $key=>$value){
+	if(!strstr($key, '/etc')):
+		unset($folders[$key]);
+	endif;
+}
+unset($folders['/etc/frontend']);
+unset($folders['/etc/adminhtml']);
+```
+they can also push elements if needed
+
+Ex. **module.default.cli.php**
+```
+<?php
+require_once 'module.simple.php';
+$folders['/Console'] = true;
+$folders['/Console/Command'] = true;
+
+$files["/etc/di.xml"] = "climod_etc_di.skel";
+```
 ## Adding your own skel files ##
 (missing docs)
 
