@@ -168,6 +168,14 @@ Publish package? (defaults to 0, CTRL+C to abort)
   [1] yes
  > 
 ```
+## How it works ##
+Generation is run against a config file of your choice. Config files reside in the Generator/Model/res/configs folder.
+There you can find a bunch of already configured modules types.
+These config files basically contains:
+- an array of folder names and their location
+- an array of files to generate, mapped to corresponding skel files that act as templates for the content of the generated files
+- an array of local replacers (in addition to the default ones) which are substituted in the skel files
+- an array of processors that help replacers substitution in some particular files (usually when some elements have to be repeated in a loop)
 
 ## Adding your config files ##
 (missing docs)
