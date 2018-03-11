@@ -184,7 +184,7 @@ The other config files simply include **module.default.all.php** (or **module.si
 Ex. **module.simple.php**
 ```
 <?php
-require_once 'module.default.all.php';
+require_once 'module.default.all.php';//<<<<
 
 foreach($folders as $key=>$value){
 	if(!strstr($key, '/etc')):
@@ -199,7 +199,8 @@ they can also push elements if needed
 Ex. **module.default.cli.php**
 ```
 <?php
-require_once 'module.simple.php';
+require_once 'module.simple.php';//<<<<
+
 $folders['/Console'] = true;
 $folders['/Console/Command'] = true;
 
