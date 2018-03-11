@@ -49,7 +49,7 @@ ranx:generate:module                       Module skeleton generation.
 **ranx:generate:module vendor/module**
 to generate a new module from the root of magento installation
 ```
-someuser@somepc: magento/bin ranx:generate:module <vendorname>/<modulename>
+someuser@somepc: bin/magento ranx:generate:module <vendorname>/<modulename>
 ```
 it will ask you what config file you want to use
 
