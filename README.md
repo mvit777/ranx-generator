@@ -61,6 +61,10 @@ Please select a config file (defaults to 0, CTRL+C to abort)
   [3] module.default.all.php
  > 
 ```
+**Ouput** a new Vendor/Module folder in the app/code/ folder.
+If the Vendor does not already exists it will be created. If the Module folder 
+already exists generation will not take place
+
 Choice 0 (module.simple.php) builds only a very basic module with only required files. 
 Should you decide to add another element (Ex. a controller) without recreating the whole module 
 you can use the modulepart command
@@ -68,6 +72,8 @@ you can use the modulepart command
 ```
  bin/magento ranx:generate:modulepart Test/Ranx_catalog
 ```
+**Ouput** new module elements are added to an existing Module
+
 which only shows config files for partial module generation. 
 Currently there is only one config file of this kind, but you can add your own by simply 
 extending from the module.default.all.php (more on this in later sections)
@@ -92,6 +98,10 @@ Please select a config file (defaults to 0, CTRL+C to abort)
   [0] theme.simple.php
  > 
 ```
+**Ouput** a new Vendor/Theme folder in the app/design/frontend or adminhtml.
+If the Vendor does not already exists it will be created. If the Theme folder 
+already exists generation will not take place
+
 You will be prompted to decide wheter it is a frontend or admin template
 ```
 Start building theme Test/Ranx_catalog
@@ -115,6 +125,9 @@ theme or module
 ```
 someuser@somepc: bin/magento ranx:generate:package <vendor>/<module_or_theme_name>
 ```
+**Output** a .zip package in the Generator/bin/code or design folder. Along the process 
+the package can be uploaded to some remote repository
+
 It will prompt you to specify if it a theme or a module
 ```
 Is this a module or a theme? (defaults to 0, CTRL+C to abort)
@@ -126,8 +139,28 @@ Is this a module or a theme? (defaults to 0, CTRL+C to abort)
 If is a module you will be asked if you want to validate it against [Magento2 validator](https://github.com/magento/marketplace-tools)
 
 ```
-
+Skip package validation? (defaults to 0, CTRL+C to abort)
+  [0] no
+  [1] yes
+ > 
 ```
+if it a theme you will be asked if it is a frontend or admin theme
+```
+Is this frontend or admin theme? (defaults to 0, CTRL+C to abort)
+  [0] frontend
+  [1] adminhtml
+ > 
+```
+
+and finally it will ask you if package has to be published to some remote repository
+```
+Publish options config file is placed in Model/res/configs/publisher/config.php
+Publish package? (defaults to 0, CTRL+C to abort)
+  [0] no
+  [1] yes
+ > 
+```
+
 ## Adding your config files ##
 (missing docs)
 
