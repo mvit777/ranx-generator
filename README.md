@@ -221,15 +221,15 @@ At the moment only four types of modules' boilerplate and one theme boilerplate 
 The idea is to replicate all the library of sample modules that is hosted on [magento samples](https://github.com/magento/magento2-samples)
 
 ## Adding your own skel files ##
-Files generation happens through the processing of templates files  (.skel) that reside in the Generator/Model/res/skel folder.
-Placeholders in those files are replaced by a list of replacers configured in the config file and for some files with the help of processors (see next section).
+Files generation happens through the processing of templates files  (.skel) that reside in the **Generator/Model/res/skel folder**.
+Placeholders in those files are replaced by a list of **replacers** configured in the config file and for some files with the help of **processors** (see next section).
 
 As for config files you can add more skel to accomodate your generation needs.
 
 ## Replacers and Processors ##
 A typical skel file looks something like that
 
-**someskel_file**
+**Model/res/skel/default_controller_index.skel**
 ```
 <?php
 /**
@@ -274,6 +274,11 @@ $local_replacers = [
 	"@@commanditems@@"	=> "",
 ];
 ```
+Some skel files needs more complex processing, for instance a loop to generate html/xml elements with some tokens to replace, for those 
+cases you can configure **processors**
+
+A good example can be the di.xml file to configure some events for an Observer....
+(not fully implemented, to be continued)
 ## Outputting and Packaging your theme/module ##
 (missing docs)
 
