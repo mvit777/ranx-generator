@@ -294,6 +294,24 @@ If you rather want to package and publish your module/theme to a remote reposito
 Before using the publishing option you have to configure one or more remote repositories.
 If you only want to configure one remote repository (let's say a public Github repository), configuration should be 
 pretty straight foward and can be easily figured out by watching at the Generator/Model/res/configs/publisher/config.php 
+```
+$publishing_options = array(
+	'repos' => array(
+	    //github branch
+	    //repositories must exist and be registered as remotes in local git
+		'github'=>'https://github.com/mvit777/m2_ext.git'
+	),
+	'commands' => array(
+		'github'=>'git push -u origin master'
+	)
+);
+```
+Basically you put the Generator/bin/code(or design) folder under git.
+You add a branch **github** and remote url. 
+Then you fill publisher/config.php
+
+Multiple repository configuration is a bit more tricky (better docs needed)
+Ex. private on Bitbucket and public on Github (to be continued)
 
 ## Todo ##
 - add more templates files
