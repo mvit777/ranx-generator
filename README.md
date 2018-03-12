@@ -289,7 +289,11 @@ If you rather want to package and publish your module/theme to a remote reposito
 **ranx:generate:package vendor/theme** command as documented above in the **Usage** section.
 
 ## Publishing your theme/module to a remote repository ##
-(missing docs)
+(fully implemented but needs some polishing, also needs better docs on how to configure multiple repositories)
+
+Before using the publishing option you have to configure one or more remote repositories.
+If you only want to configure one remote repository (let's say a public Github repository), configuration should be 
+pretty straight foward and can be easily figured out by watching at the Generator/Model/res/configs/publisher/config.php 
 
 ## Todo ##
 - add more templates files
