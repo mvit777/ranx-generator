@@ -25,6 +25,8 @@ app/
 enable the module
 ```
 bin/magento module:enable Ranx_Generator
+bin/magento setup:upgrade
+bin/magento setup:di:compile
 ```
 ## Available Commands ##
 From the root of magento list all availabe commands and look for ranx entry
