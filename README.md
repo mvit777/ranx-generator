@@ -179,7 +179,7 @@ These config files basically contains:
 
 ## Adding your config files ##
 The **module.default.all.php** config file contains every possible file and folder (well not quite yet, but something like 90% atm).
-The other config files simply include **module.default.all.php** (or **module.simple.php**) and pop elements from those two arrays when needed.
+The other config files simply include **[module.default.all.php](https://github.com/mvit777/ranx-generator/blob/master/Generator/Model/res/configs/module.default.all.php)** (or **module.simple.php**) and pop elements from those two arrays when needed.
 So one does not need to replicate all the configurations from config file to config file but rather add/remove/adjust only those who are needed
 
 Ex. **module.simple.php**
