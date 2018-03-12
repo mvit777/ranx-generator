@@ -246,9 +246,34 @@ class Index extends \Magento\Framework\App\Action\Action{
 	protected $resultPageFactory;
 ```
 An array of default replacers gets generated automatically at module generation runtime
-
-and local_replacers array in the config 
-
+```
+<?php
+namespace Ranx\Generator\Model;
+trait ModuleTraits{
+		
+	public function getReplacers(){
+		$replacers = array(
+			'@@lowercasevendor@@'=>strtolower($this->vendor),
+			'@@lowercasemodule@@'=>strtolower($this->module),
+			'@@vendor@@'=>$this->vendor,
+			'@@packagename@@' =>$this->getPackageName(),
+			'@@module@@'=>$this->module,
+			'@@date@@'=> date('l jS \of F Y h:i:s A'),
+		);
+		
+		return array_merge($replacers, $this->local_replacers);
+	}
+```
+and it is merged with a local_replacers array which you can define in the config file
+```
+$local_replacers = [
+	"@@youroutes@@"		=>"",
+	"@@yourevents@@" 	=> "",
+	"@@yourdi@@"		=> "",
+	"@@copyright@@"		=> "put your copyright here",
+	"@@commanditems@@"	=> "",
+];
+```
 ## Outputting and Packaging your theme/module ##
 (missing docs)
 
