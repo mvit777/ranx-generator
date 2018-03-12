@@ -231,7 +231,19 @@ A typical skel file looks something like that
 
 **someskel_file**
 ```
+<?php
+/**
+ * @@copyright@@
+ * See COPYING.txt for license details.
+ */
+namespace @@vendor@@\@@module@@\Controller\Index;
 
+use \Magento\Framework\App\Action\Context;
+use \Magento\Framework\View\Result\PageFactory;
+
+class Index extends \Magento\Framework\App\Action\Action{
+		
+	protected $resultPageFactory;
 ```
 An array of default replacers gets generated automatically at module generation runtime
 
