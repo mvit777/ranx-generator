@@ -282,7 +282,11 @@ cases you can configure **processors**
 A good example can be the di.xml file to configure some events for an Observer....
 (not fully implemented, to be continued)
 ## Outputting and Packaging your theme/module ##
-(missing docs)
+As said before, after module or theme generation a new module or theme will reside in the app/code or app/design of your current magento installation (which will be most probably a developer machine).
+If it is module it needs to be enabled and all the other usual module installation steps (di:compile etc etc).
+If it is a theme it needs to be applied to your store globally or only to some pages of your magento installation.
+If you rather want to package and publish your module/theme to a remote repository you can use the 
+**ranx:generate:package vendor/theme** command as documented above in the **Usage** section.
 
 ## Publishing your theme/module to a remote repository ##
 (missing docs)
