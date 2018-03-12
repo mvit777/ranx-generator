@@ -180,6 +180,7 @@ These config files basically contains:
 ## Adding your config files ##
 The **module.default.all.php** config file contains every possible file and folder (well not quite yet, but something like 90% atm).
 The other config files simply include **module.default.all.php** (or **module.simple.php**) and pop elements from those two arrays when needed.
+So one does not need to replicate all the configurations from config file to config file but rather add/remove/adjust only those who are needed
 
 Ex. **module.simple.php**
 ```
@@ -221,11 +222,20 @@ The idea is to replicate all the library of sample modules that is hosted on [ma
 
 ## Adding your own skel files ##
 Files generation happens through the processing of templates files  (.skel) that reside in the Generator/Model/res/skel folder.
-Placeholders in those file are replaced by a list of replacers configured in the config file and for some files with the help of processors (see next section).
-As for config files you can add more skel to accomodate your generation needs
+Placeholders in those files are replaced by a list of replacers configured in the config file and for some files with the help of processors (see next section).
+
+As for config files you can add more skel to accomodate your generation needs.
 
 ## Replacers and Processors ##
-(missing docs)
+A typical skel file looks something like that
+
+**someskel_file**
+```
+
+```
+An array of default replacers gets generated automatically at module generation runtime
+
+and local_replacers array in the config 
 
 ## Outputting and Packaging your theme/module ##
 (missing docs)
