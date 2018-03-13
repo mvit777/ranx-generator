@@ -303,6 +303,16 @@ $local_replacers = [
        ...other values
 ];
 ```
+Then back in the **modulepart.observer** config file you have to define what events you want the Observer to watch.
+Let's suppose we want to listen to **the page_block_html_topmenu_gethtml_before** and **page_block_html_topmenu_gethtml_after** events that are triggered by TopMenu component
+
+$processors = [
+  ['__events__'] = [
+  					['subscriptions'] = array(),
+  					['processor_file'] = ''
+  				];
+
+];
 
 
 (not fully implemented, to be continued)
