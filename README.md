@@ -321,7 +321,7 @@ $processors = [
 ];
 ```
 Now whenever we parse a file with one or more placeholders matching a key in the processors array the content of his replacers are 
-created with the aid of the [Processor Class]() and a template file we specify in the processor_file value as an additional template.
+created with the aid of the [Processor Class](ranx-generator/blob/master/Generator/Model/Processor.php) and a template file we specify in the processor_file value as an additional template.
 
 (not fully implemented, to be continued)
 
