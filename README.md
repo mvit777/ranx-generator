@@ -154,7 +154,7 @@ Skip package validation? (defaults to 0, CTRL+C to abort)
   [1] yes
  > 
 ```
-if it a theme you will be asked if it is a frontend or admin theme
+if it is a theme you will be asked if it is a frontend or admin theme
 ```
 Is this frontend or admin theme? (defaults to 0, CTRL+C to abort)
   [0] frontend
