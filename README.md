@@ -304,16 +304,24 @@ $local_replacers = [
 ];
 ```
 Then back in the **modulepart.observer** config file you have to define what events you want the Observer to watch.
-Let's suppose we want to listen to **the page_block_html_topmenu_gethtml_before** and **page_block_html_topmenu_gethtml_after** events that are triggered by TopMenu component
-
+Let's suppose we want to listen to **the page_block_html_topmenu_gethtml_before** and **page_block_html_topmenu_gethtml_after** events that are triggered by TopMenu component.
+With add an array with those events as the value of the subscripitions array of the events token. 
+We also specify that we need a module_events.php processor (a php file in the Model/res/processors) to help us produce content 
+for the the placeholder @@events@@
+```
 $processors = [
   ['__events__'] = [
-  					['subscriptions'] = array(),
-  					['processor_file'] = ''
-  				];
+  			['subscriptions'] = [
+						'the page_block_html_topmenu_gethtml_before',
+						'the page_block_html_topmenu_gethtml_after
+					     ],
+  			['processor_file'] = 'module_events.php'//<-- a file in the Model/res/processors folder
+  		];
 
 ];
-
+```
+Now whenever we parse a file with one or more placeholders matching a key in the processors array the content of his replacers are 
+created with the aid of the [Processor Class]() and a template file we specify in the processor_file value as an additional template.
 
 (not fully implemented, to be continued)
 
