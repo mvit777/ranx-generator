@@ -371,8 +371,7 @@ class Observer implements ObserverInterface{
 	*/
 	public function execute(EventObserver $observer)
 	{
-		//$observer can catch a lot of things -- https://www.mageplaza.com/magento-2-module-development/magento-2-events.html
-		//ex. $menu = $observer->getMenu();
+		//list of available events -- https://www.mageplaza.com/magento-2-module-development/magento-2-events.html
 		$event = $observer->getEventName();
 		
 		if(method_exists($this, $event)):
@@ -388,7 +387,10 @@ class Observer implements ObserverInterface{
 	
 	protected function page_block_html_topmenu_gethtml_after($observer){
 		
-		return "something";
+		//ex. 
+		$menu = $observer->getMenu();
+		//add some items
+		return "some message";
 	}
 	
 	*/
