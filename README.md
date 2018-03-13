@@ -228,7 +228,7 @@ Placeholders in those files are replaced by a list of **replacers** configured i
 
 As for config files you can add more skel to accomodate your generation needs.
 
-## Replacers and Processors ##
+## Adding Replacers and Processors ##
 A typical skel file looks something like that
 
 **Model/res/skel/default_controller_index.skel**
