@@ -25,6 +25,8 @@ app/
 enable the module
 ```
 bin/magento module:enable Ranx_Generator
+bin/magento setup:upgrade
+bin/magento setup:di:compile
 ```
 ## Available Commands ##
 From the root of magento list all availabe commands and look for ranx entry
@@ -152,7 +154,7 @@ Skip package validation? (defaults to 0, CTRL+C to abort)
   [1] yes
  > 
 ```
-if it a theme you will be asked if it is a frontend or admin theme
+if it is a theme you will be asked if it is a frontend or admin theme
 ```
 Is this frontend or admin theme? (defaults to 0, CTRL+C to abort)
   [0] frontend
@@ -179,7 +181,8 @@ These config files basically contains:
 
 ## Adding your config files ##
 The **module.default.all.php** config file contains every possible file and folder (well not quite yet, but something like 90% atm).
-The other config files simply include **module.default.all.php** (or **module.simple.php**) and pop elements from those two arrays when needed.
+The other config files simply include **[module.default.all.php](https://github.com/mvit777/ranx-generator/blob/master/Generator/Model/res/configs/module.default.all.php)** (or **module.simple.php**) and pop elements from those two arrays when needed.
+So one does not need to replicate all the configurations from config file to config file but rather add/remove/adjust only those who are needed
 
 Ex. **module.simple.php**
 ```
@@ -220,18 +223,95 @@ At the moment only four types of modules' boilerplate and one theme boilerplate 
 The idea is to replicate all the library of sample modules that is hosted on [magento samples](https://github.com/magento/magento2-samples)
 
 ## Adding your own skel files ##
-Files generation happens through the processing of templates files  (.skel) that reside in the Generator/Model/res/skel folder.
-Placeholders in those file are replaced by a list of replacers configured in the config file and for some files with the help of processors (see next section).
-As for config files you can add more skel to accomodate your generation needs
+Files generation happens through the processing of templates files  (.skel) that reside in the **Generator/Model/res/skel folder**.
+Placeholders in those files are replaced by a list of **replacers** configured in the config file and for some files with the help of **processors** (see next section).
+
+As for config files you can add more skel to accomodate your generation needs.
 
 ## Replacers and Processors ##
-(missing docs)
+A typical skel file looks something like that
 
+**Model/res/skel/default_controller_index.skel**
+```
+<?php
+/**
+ * @@copyright@@
+ * See COPYING.txt for license details.
+ */
+namespace @@vendor@@\@@module@@\Controller\Index;
+
+use \Magento\Framework\App\Action\Context;
+use \Magento\Framework\View\Result\PageFactory;
+
+class Index extends \Magento\Framework\App\Action\Action{
+		
+	protected $resultPageFactory;
+```
+An array of default replacers gets generated automatically at module generation runtime
+```
+<?php
+namespace Ranx\Generator\Model;
+trait ModuleTraits{
+		
+	public function getReplacers(){
+		$replacers = array(
+			'@@lowercasevendor@@'=>strtolower($this->vendor),
+			'@@lowercasemodule@@'=>strtolower($this->module),
+			'@@vendor@@'=>$this->vendor,
+			'@@packagename@@' =>$this->getPackageName(),
+			'@@module@@'=>$this->module,
+			'@@date@@'=> date('l jS \of F Y h:i:s A'),
+		);
+		
+		return array_merge($replacers, $this->local_replacers);
+	}
+```
+and it is merged with a local_replacers array which you can define in the config file
+```
+$local_replacers = [
+	"@@youroutes@@"		=>"",
+	"@@yourevents@@" 	=> "",
+	"@@yourdi@@"		=> "",
+	"@@copyright@@"		=> "put your copyright here",
+	"@@commanditems@@"	=> "",
+];
+```
+Some skel files needs more complex processing, for instance a loop to generate html/xml elements with some tokens to replace, for those 
+cases you can configure **processors**
+
+A good example can be the di.xml file to configure some events for an Observer....
+(not fully implemented, to be continued)
 ## Outputting and Packaging your theme/module ##
-(missing docs)
+As said before, after module or theme generation a new module or theme will reside in the app/code or app/design of your current magento installation (which will be most probably a developer machine).
+If it is module it needs to be enabled and all the other usual module installation steps (di:compile etc etc).
+If it is a theme it needs to be applied to your store globally or only to some pages of your magento installation.
+If you rather want to package and publish your module/theme to a remote repository you can use the 
+**ranx:generate:package vendor/theme** command as documented above in the **Usage** section.
 
 ## Publishing your theme/module to a remote repository ##
-(missing docs)
+(fully implemented but needs some polishing, also needs better docs on how to configure multiple repositories)
+
+Before using the publishing option you have to configure one or more remote repositories.
+If you only want to configure one remote repository (let's say a public Github repository), configuration should be 
+pretty straight foward and can be easily figured out by watching at the Generator/Model/res/configs/publisher/config.php 
+```
+$publishing_options = array(
+	'repos' => array(
+	    //github branch
+	    //repositories must exist and be registered as remotes in local git
+		'github'=>'https://github.com/mvit777/m2_ext.git'
+	),
+	'commands' => array(
+		'github'=>'git push -u origin master'
+	)
+);
+```
+Basically you put the Generator/bin/code(or design) folder under git.
+You add a branch **github** and remote url. 
+Then you fill publisher/config.php
+
+Multiple repository configuration is a bit more tricky (better docs needed)
+Ex. private on Bitbucket and public on Github (to be continued)
 
 ## Todo ##
 - add more templates files
