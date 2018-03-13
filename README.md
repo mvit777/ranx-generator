@@ -312,8 +312,8 @@ for the the placeholder @@events@@
 $processors = [
   ['__events__'] = [
   			['subscriptions'] = [
-						'the page_block_html_topmenu_gethtml_before',
-						'the page_block_html_topmenu_gethtml_after
+						'page_block_html_topmenu_gethtml_before',
+						'page_block_html_topmenu_gethtml_after'
 					     ],
   			['processor_file'] = 'module_events.php'//<-- a file in the Model/res/processors folder
   		];
@@ -321,7 +321,7 @@ $processors = [
 ];
 ```
 Now whenever we parse a file with one or more placeholders matching a key in the processors array the content of his replacers are 
-created with the aid of the [Processor Class](https://github.com/mvit777/ranx-generator/blob/master/Generator/Model/Processor.php) and a template file we specify in the processor_file value as an additional template.
+created with the aid of the [Processor Class](https://github.com/mvit777/ranx-generator/blob/master/Generator/Model/Processor.php) and a template file we specify in the **processor_file** value as an additional template.
 
 (not fully implemented, to be continued)
 
