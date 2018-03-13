@@ -228,7 +228,7 @@ Placeholders in those files are replaced by a list of **replacers** configured i
 
 As for config files you can add more skel to accomodate your generation needs.
 
-## Replacers and Processors ##
+## Adding Replacers and Processors ##
 A typical skel file looks something like that
 
 **Model/res/skel/default_controller_index.skel**
@@ -269,18 +269,159 @@ trait ModuleTraits{
 and it is merged with a local_replacers array which you can define in the config file
 ```
 $local_replacers = [
-	"@@youroutes@@"		=>"",
-	"@@yourevents@@" 	=> "",
-	"@@yourdi@@"		=> "",
+	"@@events@@" 	        => "",
+	"@@di@@"		=> "",
 	"@@copyright@@"		=> "put your copyright here",
 	"@@commanditems@@"	=> "",
 ];
 ```
 Some skel files needs more complex processing, for instance a loop to generate html/xml elements with some tokens to replace, for those 
-cases you can configure **processors**
+cases you can configure **processors** in the $processors section of the config file of your choice.
 
 A good example can be the di.xml file to configure some events for an Observer....
-(not fully implemented, to be continued)
+
+**Putting all together**
+
+Let's suppose we want to generate a **modulepart.observer** config so that we can add an Observer to an already existing module.
+We also want the possibility to generate an etc/frontend/events.xml file so that we can subscribe our Observer to an array of events of our choice. 
+We also want this new configuration to show up permanently both in module and modulepart available configs menu.
+
+**Model/res/configs/modulepart.observer.php**
+```
+<?php
+require_once 'module.default.all.php';
+
+//unset all folders that are not part of the Observer
+foreach($folders as $key=>$value){
+	if(!strstr($key, '/Observer') && $key != '/etc/frontend'):
+		unset($folders[$key]);
+	endif;
+}
+
+//unset all files that are not part of the Observer
+foreach($files as $key=>$value):
+	if($key != "/Observer/Observer.php" && $key !="/etc/frontend/events.xml"):
+		unset($files[$key]);
+	endif;
+endforeach;
+```
+
+Then we have to create/alter/overwrite an array of $processors in the **modulepart.observer** config file.
+```
+$processors = [
+  ['__events__'] = [
+  					['subscriptions'] = array(),
+  					['processor_file'] = ''
+  				];
+
+];
+```
+then update the $local_replacers array by adding/editing the @@events@@ key 
+
+```
+$local_replacers = [
+       "@@events@@ => '__events__'
+       ...other values
+];
+```
+Then back in the **modulepart.observer** config file you have to define what events you want the Observer to watch.
+Let's suppose we want to listen to **the page_block_html_topmenu_gethtml_before** and **page_block_html_topmenu_gethtml_after** events that are triggered by TopMenu component.
+With add an array with those events as the value of the subscripitions array of the events token. 
+We also specify that we need a module_events.php processor (a php file in the Model/res/processors) to help us produce content 
+for the the placeholder @@events@@
+```
+$processors = [
+  ['__events__'] = [
+  			['subscriptions'] = [
+						'page_block_html_topmenu_gethtml_before',
+						'page_block_html_topmenu_gethtml_after'
+					     ],
+  			['processor_file'] = 'module_events.php'//<-- a file in the Model/res/processors folder
+  		];
+
+];
+```
+Now whenever we parse a file with one or more placeholders matching a key in the processors array the content of his replacers are 
+created with the aid of the [Processor Class](https://github.com/mvit777/ranx-generator/blob/master/Generator/Model/Processor.php) and a template file we specify in the **processor_file** value as an additional template.
+
+We now have to add the missing skel that might look like that
+**skel/default_etc_frontend_events.skel**
+```
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<!-- see list of available page events https://www.mageplaza.com/magento-2-module-development/magento-2-events.html -->
+
+ @@events@@
+</config>
+```
+**skel/default_observer.skel**
+```
+<?php
+
+namespace @@vendor@@\@@module@@\Observer;
+
+use Magento\Framework\Event\Observer as EventObserver;
+use Magento\Framework\Data\Tree\Node;
+use Magento\Framework\Event\ObserverInterface;
+
+class Observer implements ObserverInterface{
+	/**
+	* @param EventObserver $observer
+	* @return $this
+	*/
+	public function execute(EventObserver $observer)
+	{
+		//list of available events -- https://www.mageplaza.com/magento-2-module-development/magento-2-events.html
+		$event = $observer->getEventName();
+		
+		if(method_exists($this, $event)):
+			$result = call_user_func_array(array($this, $event), array($observer));
+		else:
+			error_log("the $event method is not implemented in @@vendor@@/@@module@@/Observer/Observer.php");
+		endif;
+		
+		return $this;
+	}
+	
+	/* Example
+	
+	protected function page_block_html_topmenu_gethtml_after($observer){
+		
+		//ex. 
+		$menu = $observer->getMenu();
+		//add some items
+		return "some message";
+	}
+	
+	*/
+}
+```
+**Generator/Model/res/processors/module_events.php**
+```
+<?php
+/*
+ * can compile etc/events.xml, etc/frontend/events.xml
+ */
+ $events = $configs['processors']['__events__']['subscriptions'] ?>
+?>
+
+<?php foreach($events as $event): ?>
+	<event name="<?php echo $event ?>">
+  	<observer name="@@vendor@@_@@module@@_observer" instance="@@vendor@@\@@module@@\Observer\Observer" />
+</event>
+<?php endforeach; ?>
+```
+Now both module and modulepart commands should display a new config menu entry
+
+```
+Config files are placed in /var/www/magento2/magento/app/code/Ranx/Generator/Model/res/configs
+Please select a config file (defaults to 0, CTRL+C to abort)
+  [0] modulepart.controller.php
+  [1] modulepart.observer.php
+ > 
+```
+and add an Observer with some configurable implementation
+
 ## Outputting and Packaging your theme/module ##
 As said before, after module or theme generation a new module or theme will reside in the app/code or app/design of your current magento installation (which will be most probably a developer machine).
 If it is module it needs to be enabled and all the other usual module installation steps (di:compile etc etc).
