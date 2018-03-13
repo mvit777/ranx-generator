@@ -277,10 +277,16 @@ $local_replacers = [
 ];
 ```
 Some skel files needs more complex processing, for instance a loop to generate html/xml elements with some tokens to replace, for those 
-cases you can configure **processors**
+cases you can configure **processors** in the $processors section of the config file of you choice.
+
+**Putting all together**
+
+Let's suppose we want to generate a **modulepart.observer** config so that we can add an Observer to an already existing module.
+We also want the choice to generate an etc/frontend/events.xml file so that we can subscribe our Observer to an array of events of our choice. 
 
 A good example can be the di.xml file to configure some events for an Observer....
 (not fully implemented, to be continued)
+
 ## Outputting and Packaging your theme/module ##
 As said before, after module or theme generation a new module or theme will reside in the app/code or app/design of your current magento installation (which will be most probably a developer machine).
 If it is module it needs to be enabled and all the other usual module installation steps (di:compile etc etc).
