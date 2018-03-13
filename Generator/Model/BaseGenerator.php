@@ -65,7 +65,11 @@ abstract class BaseGenerator implements IGenerator{
 				
 				if ($this->filesystem->exists($this->resourcePath)):
 					//TODO: if file
-		 			throw new \Exception("Error ".$this->resourcePath." already exists");
+					if(isset($configs['skip_duplicates'])):
+						$this->message .= "Warning $this->resourcePath already exists";
+					else:
+		 				throw new \Exception("Error ".$this->resourcePath." already exists");
+					endif;
 					//TODO: if folder log, unset folder key and skip
 				endif;
 			break;

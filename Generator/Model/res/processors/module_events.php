@@ -2,7 +2,7 @@
 /*
  * compiles etc/events.xml, etc/frontend/events.xml
  */
- $events = $configs['processors']['events']['subscriptions'] ?>
+ $events = $configs['processors']['__events__']['subscriptions'] ?>
 ?>
 
 <?php foreach($events as $event): ?>

@@ -69,7 +69,9 @@ trait ModuleTraits{
 						$key = str_replace($k, $v, $key);
 					endif;
 				endforeach;
+				
 				$this->message .= $this->folderGenerator->run($path.$key, $folderConfigs).PHP_EOL;
+				
 			endif;
 		endforeach;
 	}

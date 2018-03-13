@@ -18,7 +18,11 @@ class FolderGenerator extends BaseGenerator implements IGenerator{
 		try{
 			mkdir($this->resourcePath);
 		}catch(\exception $e){
-			throw new \Exception("$this->resourcePath could not be created");
+			if(isset($configs['skip_duplicates'])):
+				$this->message .="$this->resourcePath already exists skipping...";
+			else:
+				throw new \Exception("$this->resourcePath could not be created");
+			endif;
 			
 		}
 		

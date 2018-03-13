@@ -17,6 +17,11 @@ class Processor implements IGenerator{
 		$this->message = ob_get_contents();
 		ob_end_clean();
 		
+		foreach($configs['replacers'] as $key=>$value):
+			if(strstr($this->message, $key)):
+				$this->message = str_replace($key, $value, $this->message);
+			endif;
+		endforeach;
 		return $this->getMessage();
 	}
 	

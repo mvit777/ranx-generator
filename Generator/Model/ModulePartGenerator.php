@@ -29,6 +29,7 @@ class ModulePartGenerator extends ModuleGenerator implements IGenerator{
 		if(!$this->folderGenerator->filesystem->exists($modulePath)):
 			throw new \Exception("Error module $modulePath does not exists");
 		endif;
+		
 		//dir app/code/Vendor/Module/etc must exist or must be present in $this->folders keys or in the folder
 		if(!$this->fileGenerator->filesystem->exists($modulePath.'/etc/module.xml')):
 			if(!$this->folderGenerator->filesystem->exists($modulePath.'/etc')):
@@ -43,6 +44,7 @@ class ModulePartGenerator extends ModuleGenerator implements IGenerator{
 				$this->message .= "Warning /etc/module.xml already exists...not writing it".PHP_EOL;
 			endif;	
 		endif;
+		
 		//checks for other files that should be already there and put them in compile list if not
 		$checks = array(
 			"/composer.json"			=> "default_root_composer.skel",
@@ -62,6 +64,8 @@ class ModulePartGenerator extends ModuleGenerator implements IGenerator{
 				endif;
 			endif;
 		endforeach;
+		$folderConfigs['replacers'] = $this->getReplacers();
+		$folderConfigs['skip_duplicates'] = 1;
 		
 		$this->message .= $this->compileFolders($this->path, $folderConfigs);
 	}

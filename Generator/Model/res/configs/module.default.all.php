@@ -39,6 +39,7 @@ $files = [
 	"/etc/frontend/routes.xml"				=> "default_etc_frontend_routes.skel",
 	"/etc/frontend/events.xml"				=> "default_etc_frontend_events.skel",
 	"/Controller/Index/Index.php" 			=> "default_controller_index.skel",
+	"/Observer/Observer.php"				=> "default_observer.skel",
 	"/view/frontend/css/source/module.less" => "empty_file.skel",
 	"/view/frontend/layout/@@lowercasemodule@@_index_index.xml" => "default_view_frontend_layout_module_index.skel",
 	"/view/frontend/templates/index.phtml" => "empty_file.skel",
@@ -49,19 +50,23 @@ $files = [
 //local replacers are indeed merged
 $local_replacers = [
 	"@@routes@@"		=>"",
-	"@@events@@" 	=> "events",
+	"@@events@@" 	=> "__events__",
 	"@@di@@"		=> "",
 	"@@copyright@@"		=> "put your copyright here",
 	"@@commanditems@@"	=> "",
 ];
 
-$processors = [
-  ['events'] = [
-  					['subscriptions'] = array(),
-  					['processor_file'] = ''
-  				];
+$processors = array(
+  '__events__' => array(
+  					'subscriptions' => array(
+											'page_block_html_topmenu_gethtml_before',
+											'page_block_html_topmenu_gethtml_after'
+					     				),
+					     				
+  					'processor_file' => 'module_events.php'
+  				)
 
-];
+);
 //spostato in Model/res/configs/publisher/config.php
 //$package = [];//also see this page http://devdocs.magento.com/guides/v2.2/extension-dev-guide/package/package_module.html
 

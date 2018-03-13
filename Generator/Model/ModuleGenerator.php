@@ -36,6 +36,9 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		endif;
 		$this->configure($path, $configs);
 		$this->loadConfig($configs['config_file']);
+		if(strstr($configs['config_file'], 'modulepart')):
+			$configs['skip_duplicates'] = 1;
+		endif;
 		$this->buildFolders($configs);
 		$this->buildFiles($configs);
 		
@@ -43,6 +46,7 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 	}
 	
 	protected function buildFolders($folderConfigs){
+		
 		//$path = $this->path;
 		//$folderConfigs = array('res_type'=>'code');
 		//vendor folder
@@ -64,12 +68,6 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		
 		$replacers = $this->getReplacers();
 		
-		//MOVE FROM HERE
-		/*if(array_key_exists("@@yourevents@@", $replacers) && !empty($this->events)):
-			$replacers["@@yourevents@@"] = $this->buildEvents();
-		endif;*/
-		//same for di and routes
-		//$fileConfigs = array('res_type'=>'code', 'replacers'=>$replacers);
 		$fileConfigs['replacers'] = $replacers;
 		if(!empty($this->processors)):
 			$fileConfigs['replacers'] = $this->processors($replacers, $fileConfigs);
@@ -81,6 +79,7 @@ class ModuleGenerator extends BaseGenerator implements IGenerator{
 		$processor = new Processor();
 		foreach($replacers as $key=>$value):
 			if(array_key_exists($value, $this->processors)):
+				$value = $this->processors[$value]['processor_file'];
 				$replacers[$key] = $processor->run($value, array('replacers'=>$replacers, 'processors'=>$this->processors));
 			endif;
 		endforeach;
