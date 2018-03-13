@@ -269,7 +269,7 @@ trait ModuleTraits{
 and it is merged with a local_replacers array which you can define in the config file
 ```
 $local_replacers = [
-	"@@yevents@@" 	        => "",
+	"@@events@@" 	        => "",
 	"@@di@@"		=> "",
 	"@@copyright@@"		=> "put your copyright here",
 	"@@commanditems@@"	=> "",
@@ -285,6 +285,24 @@ A good example can be the di.xml file to configure some events for an Observer..
 Let's suppose we want to generate a **modulepart.observer** config so that we can add an Observer to an already existing module.
 We also want the possibility to generate an etc/frontend/events.xml file so that we can subscribe our Observer to an array of events of our choice. 
 
+The first thing we have to is create/alter/overwrite an array of $processors in the **modulepart.observer** config file.
+```
+$processors = [
+  ['__events__'] = [
+  					['subscriptions'] = array(),
+  					['processor_file'] = ''
+  				];
+
+];
+```
+then update the $local_replacers array by adding/editing the @@events@@ key 
+
+```
+$local_replacers = [
+       "@@events@@ => '__events__'
+       ...other values
+];
+```
 
 
 (not fully implemented, to be continued)
