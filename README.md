@@ -269,22 +269,24 @@ trait ModuleTraits{
 and it is merged with a local_replacers array which you can define in the config file
 ```
 $local_replacers = [
-	"@@youroutes@@"		=>"",
-	"@@yourevents@@" 	=> "",
-	"@@yourdi@@"		=> "",
+	"@@yevents@@" 	        => "",
+	"@@di@@"		=> "",
 	"@@copyright@@"		=> "put your copyright here",
 	"@@commanditems@@"	=> "",
 ];
 ```
 Some skel files needs more complex processing, for instance a loop to generate html/xml elements with some tokens to replace, for those 
-cases you can configure **processors** in the $processors section of the config file of you choice.
+cases you can configure **processors** in the $processors section of the config file of your choice.
+
+A good example can be the di.xml file to configure some events for an Observer....
 
 **Putting all together**
 
 Let's suppose we want to generate a **modulepart.observer** config so that we can add an Observer to an already existing module.
-We also want the choice to generate an etc/frontend/events.xml file so that we can subscribe our Observer to an array of events of our choice. 
+We also want the possibility to generate an etc/frontend/events.xml file so that we can subscribe our Observer to an array of events of our choice. 
 
-A good example can be the di.xml file to configure some events for an Observer....
+
+
 (not fully implemented, to be continued)
 
 ## Outputting and Packaging your theme/module ##
