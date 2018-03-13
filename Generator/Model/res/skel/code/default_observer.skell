@@ -1,0 +1,37 @@
+<?php
+
+namespace @@vendor@@\@@module@@\Observer;
+
+use Magento\Framework\Event\Observer as EventObserver;
+use Magento\Framework\Data\Tree\Node;
+use Magento\Framework\Event\ObserverInterface;
+
+class Observer implements ObserverInterface{
+	/**
+	* @param EventObserver $observer
+	* @return $this
+	*/
+	public function execute(EventObserver $observer)
+	{
+		//$observer can catch a lot of things -- https://www.mageplaza.com/magento-2-module-development/magento-2-events.html
+		//ex. $menu = $observer->getMenu();
+		$event = $observer->getEventName();
+		
+		if(method_exists($this, $event)):
+			$result = call_user_func_array(array($this, $event), array($observer));
+		else:
+			error_log("the $event method is not implemented in @@vendor@@/@@module@@/Observer/Observer.php");
+		endif;
+		
+		return $this;
+	}
+	
+	/* Example
+	
+	protected function page_block_html_topmenu_gethtml_after($observer){
+		
+		return "something";
+	}
+	
+	*/
+}

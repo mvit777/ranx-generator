@@ -8,4 +8,5 @@
 	  <observer name="@@vendor@@_@@module@@_observer" instance="@@vendor@@\@@module@@\Observer\SomeOtherObserverClass" />
 	</event>
 -->
+ @@events@@
 </config>

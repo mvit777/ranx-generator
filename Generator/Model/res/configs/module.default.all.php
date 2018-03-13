@@ -48,19 +48,20 @@ $files = [
 //not implemented yet
 //local replacers are indeed merged
 $local_replacers = [
-	"@@youroutes@@"		=>"",
-	"@@yourevents@@" 	=> "",
-	"@@yourdi@@"		=> "",
+	"@@routes@@"		=>"",
+	"@@events@@" 	=> "events",
+	"@@di@@"		=> "",
 	"@@copyright@@"		=> "put your copyright here",
 	"@@commanditems@@"	=> "",
 ];
 
-$routes = [];
+$processors = [
+  ['events'] = [
+  					['subscriptions'] = array(),
+  					['processor_file'] = ''
+  				];
 
-$events = [];
-
-$di = [];
-
+];
 //spostato in Model/res/configs/publisher/config.php
 //$package = [];//also see this page http://devdocs.magento.com/guides/v2.2/extension-dev-guide/package/package_module.html
 
