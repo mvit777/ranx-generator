@@ -284,8 +284,29 @@ A good example can be the di.xml file to configure some events for an Observer..
 
 Let's suppose we want to generate a **modulepart.observer** config so that we can add an Observer to an already existing module.
 We also want the possibility to generate an etc/frontend/events.xml file so that we can subscribe our Observer to an array of events of our choice. 
+We also want this new configuration to show up permanently both in module and modulepart available configs menu.
 
-The first thing we have to is create/alter/overwrite an array of $processors in the **modulepart.observer** config file.
+**Model/res/configs/modulepart.observer.php**
+```
+<?php
+require_once 'module.default.all.php';
+
+//unset all folders that are not part of the Observer
+foreach($folders as $key=>$value){
+	if(!strstr($key, '/Observer') && $key != '/etc/frontend'):
+		unset($folders[$key]);
+	endif;
+}
+
+//unset all files that are not part of the Observer
+foreach($files as $key=>$value):
+	if($key != "/Observer/Observer.php" && $key !="/etc/frontend/events.xml"):
+		unset($files[$key]);
+	endif;
+endforeach;
+```
+
+Then we have to create/alter/overwrite an array of $processors in the **modulepart.observer** config file.
 ```
 $processors = [
   ['__events__'] = [
@@ -322,6 +343,61 @@ $processors = [
 ```
 Now whenever we parse a file with one or more placeholders matching a key in the processors array the content of his replacers are 
 created with the aid of the [Processor Class](https://github.com/mvit777/ranx-generator/blob/master/Generator/Model/Processor.php) and a template file we specify in the **processor_file** value as an additional template.
+
+We now have to add the missing skel that might look like that
+**skel/default_etc_frontend_events.skel**
+```
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<!-- see list of available page events https://www.mageplaza.com/magento-2-module-development/magento-2-events.html -->
+
+ @@events@@
+</config>
+```
+**skel/default_observer.skel**
+```
+<?php
+
+namespace @@vendor@@\@@module@@\Observer;
+
+use Magento\Framework\Event\Observer as EventObserver;
+use Magento\Framework\Data\Tree\Node;
+use Magento\Framework\Event\ObserverInterface;
+
+class Observer implements ObserverInterface{
+	/**
+	* @param EventObserver $observer
+	* @return $this
+	*/
+	public function execute(EventObserver $observer)
+	{
+		//$observer can catch a lot of things -- https://www.mageplaza.com/magento-2-module-development/magento-2-events.html
+		//ex. $menu = $observer->getMenu();
+		$event = $observer->getEventName();
+		
+		if(method_exists($this, $event)):
+			$result = call_user_func_array(array($this, $event), array($observer));
+		else:
+			error_log("the $event method is not implemented in @@vendor@@/@@module@@/Observer/Observer.php");
+		endif;
+		
+		return $this;
+	}
+	
+	/* Example
+	
+	protected function page_block_html_topmenu_gethtml_after($observer){
+		
+		return "something";
+	}
+	
+	*/
+}
+```
+
+```
+
+```
 
 (not fully implemented, to be continued)
 
