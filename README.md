@@ -396,12 +396,31 @@ class Observer implements ObserverInterface{
 	*/
 }
 ```
+**Generator/Model/res/processors/module_events.php**
+```
+<?php
+/*
+ * can compile etc/events.xml, etc/frontend/events.xml
+ */
+ $events = $configs['processors']['__events__']['subscriptions'] ?>
+?>
+
+<?php foreach($events as $event): ?>
+	<event name="<?php echo $event ?>">
+  	<observer name="@@vendor@@_@@module@@_observer" instance="@@vendor@@\@@module@@\Observer\Observer" />
+</event>
+<?php endforeach; ?>
+```
+Now both module and modulepart commands should display a new config menu entry
 
 ```
-
+Config files are placed in /var/www/magento2/magento/app/code/Ranx/Generator/Model/res/configs
+Please select a config file (defaults to 0, CTRL+C to abort)
+  [0] modulepart.controller.php
+  [1] modulepart.observer.php
+ > 
 ```
-
-(not fully implemented, to be continued)
+and add an Observer with some configurable implementation
 
 ## Outputting and Packaging your theme/module ##
 As said before, after module or theme generation a new module or theme will reside in the app/code or app/design of your current magento installation (which will be most probably a developer machine).
