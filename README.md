@@ -326,7 +326,7 @@ $local_replacers = [
 ```
 Then back in the **modulepart.observer** config file you have to define what events you want the Observer to watch.
 Let's suppose we want to listen to **the page_block_html_topmenu_gethtml_before** and **page_block_html_topmenu_gethtml_after** events that are triggered by TopMenu component.
-With add an array with those events as the value of the subscripitions array of the events token. 
+We add an array with those events as the value of the subscripitions array of the events token. 
 We also specify that we need a module_events.php processor (a php file in the Model/res/processors) to help us produce content 
 for the the placeholder @@events@@
 ```
