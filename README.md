@@ -185,7 +185,7 @@ The other config files simply include **[module.default.all.php](https://github.
 So one does not need to replicate all the configurations from config file to config file but rather add/remove/adjust only those who are needed
 
 Ex. **module.simple.php**
-```
+```php
 <?php
 require_once 'module.default.all.php';//<<<<
 
